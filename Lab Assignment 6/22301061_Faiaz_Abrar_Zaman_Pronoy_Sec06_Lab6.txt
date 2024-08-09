@@ -1,0 +1,261 @@
+#Task_1_(a)
+def factorial(n):
+  if n == 1:
+    return 1
+  else:
+    return n*factorial(n-1)
+
+print(factorial(5))
+print()
+
+#Task_1_(b)
+def fibonacci(n):
+  if n == 0:
+    return 0
+  elif n == 1:
+    return 1
+  else:
+    return fibonacci(n-1) + fibonacci(n-2)
+
+print(fibonacci(6))
+print()
+
+
+#Task_1_(c)
+def print_elem_of_array(arr):
+  if len(arr) == 0:
+    print(0)
+  elif len(arr) == 1:
+    print(arr[0])
+  else:
+    print(arr[0], end= " ")
+    return print_elem_of_array(arr[1::])
+
+arr = [1,2,3,4,5]
+print_elem_of_array(arr)
+print()
+
+#Task_1_(d)
+def powerN(base, power):
+  if power == 0 or power == 1:
+    return base
+  else:
+    if power % 2 == 0:
+      return powerN(base, power//2) * powerN(base, power//2)
+    else:
+      return base * powerN(base, power//2) * powerN(base, power//2)
+
+print(powerN(2, 7))
+print()
+
+#Task_2_(a)
+def dec_to_bin(n):
+  if n == 0:
+    return ""
+  else:
+    return dec_to_bin((n//2)) + str(n%2)
+
+print(dec_to_bin(9))
+print()
+
+
+#Task_2_(b)
+class Node:
+  def __init__(self, elem, next):
+      self.elem = elem
+      self.next = next
+
+def createlist(arr):
+  head = Node(arr[0], None)
+  temp = head
+  for i in range(1, len(arr)):
+    new_node = Node(arr[i], None)
+    temp.next = new_node
+    temp = temp.next
+  return head
+
+def sum_of_list(head):
+  if head.next == None:
+    return head.elem
+  else:
+    return head.elem + sum_of_list(head.next)
+
+arr = [1,2,3,4,5,6,7]
+head = createlist(arr)
+sum_of_list(head)
+print()
+
+#Task_2_(c)
+class Node:
+  def __init__(self, elem, next):
+      self.elem = elem
+      self.next = next
+
+def createlist(arr):
+  head = Node(arr[0], None)
+  temp = head
+  for i in range(1, len(arr)):
+    new_node = Node(arr[i], None)
+    temp.next = new_node
+    temp = temp.next
+  return head
+
+def reverse_elem(head):
+  if head.next == None:
+    print(head.elem)
+  else:
+    reverse_elem(head.next)
+    print(head.elem)
+
+arr = [1,2,3,4,5]
+head = createlist(arr)
+reverse_elem(head)
+print()
+
+#Task_3
+def hocBuilder(height):
+  if height == 1:
+    return 8
+  elif height == 0:
+    return ("Cannot build a house")
+  else:
+    return 5 + hocBuilder(height-1)
+
+hocBuilder(3)
+print()
+
+#Task_4_(a)
+def print_line(n):
+  if n == 1:
+    return(str(n))
+  else:
+    return print_line(n-1) + str(n)
+
+def triangle(n):
+  if n ==1:
+    print(str(n))
+  else:
+    triangle(n-1)
+    print((print_line(n)))
+
+triangle(5)
+print()
+
+
+#Task_4_(b)
+def print_line(n):
+  if n == 1:
+    return(str(n))
+  else:
+    return print_line(n-1) + str(n)
+
+def space_maker(n):
+      print(" " * n, end="")
+
+def triangle(n, i=0):
+    if n == 0:
+        return 0
+    else:
+        space_maker(n-1)
+        print(print_line(i+1))
+        triangle(n-1, i+1)
+
+triangle(5)
+print()
+
+
+#Task_5
+class FinalQ:
+ def print(self,array,idx):
+  if(idx<len(array)):
+    profit = self.calcProfit(array[idx])
+    print(f"Investment: {array[idx]}; Profit: {profit}")
+    self.print(array, idx+1)
+
+ def calcProfit(self,investment):
+  if investment <= 25000:
+    return 0.0
+  elif 25000 < investment <= 100000:
+    return 45 + self.calcProfit(investment-1000)
+  elif 100000 < investment:
+    return 80 + self.calcProfit(investment-1000)
+
+array=[25000,100000,250000,350000]
+f = FinalQ()
+f.print(array,0)
+print()
+
+#Task_5(Alternative)
+import sys
+sys.setrecursionlimit(10000)
+class FinalQ:
+ def print(self,array,idx):
+  if(idx<len(array)):
+    profit = self.calcProfit(array[idx])
+    print(f"Investment: {array[idx]}; Profit: {profit}")
+
+    self.print(array, idx+1)
+
+
+ def calcProfit(self,investment):
+  if investment <= 25000:
+    return 0.0
+  elif 25000 < investment <= 100000:
+    return 4.5 + self.calcProfit(investment-100)
+  elif 100000 < investment:
+    return 8 + self.calcProfit(investment-100)
+
+
+array=[25000,100000,250000,350000]
+f = FinalQ()
+f.print(array,0)
+print()
+
+
+#Must_Finish_Recursion_Task_Lab
+def flattenList(given, output):
+  if len(given) == 0:
+    return 
+  else:
+    if type(given[0]) == int:
+      output.append(given[0])
+    else:
+      flattenList(given[0], output)
+
+    flattenList(given[1::], output)
+  return output
+
+
+given_list = [1, [2, [3, [4], 5], 6], 7, 8, [9, [[10, 11], 12], 13], 14, [15, [16, [17]]]]
+output_list = flattenList(given_list, [])
+print(output_list)
+print()
+
+
+#Must_Finish_Recursion_Task_Lab_(Ungraded)
+class Node:
+    def __init__(self, next, bottom, val):
+        self.next = next # for next item
+        self.bottom = bottom # for nested item check
+        self.val = val # The integer value.
+
+def flattenLinkedList(head, output_list):
+    if head == None:
+        return
+    else:
+        output_list.append(head.val)
+        flattenLinkedList(head.bottom, output_list)
+        flattenLinkedList(head.next, output_list)
+
+head = Node(None, None, 1)
+head.next = Node(None, None, 2)
+head.next.bottom = Node(None, None, 3)
+head.next.bottom.bottom = Node(None, None, 4)
+head.next.bottom.next = Node(None, None, 5)
+head.next.next = Node(None, None, 6)
+head.next.next.next = Node(None, None, 7)
+
+output_list = []
+flattenLinkedList(head, output_list)
+
+print(output_list)
